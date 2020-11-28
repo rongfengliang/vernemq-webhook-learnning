@@ -14,7 +14,7 @@ vmq-admin  plugin enable --name vmq_webhooks
 
 * register hooks
 
-> inside container
+> inside container (each vernemq node )
 
 ```code
 vmq-admin webhooks register hook=on_publish endpoint="http://172.16.238.11:4195"
@@ -29,6 +29,8 @@ vmq-admin webhooks register hook=on_subscribe endpoint="http://172.16.238.11:419
 ```code
 vmq-admin  webhooks show
 ```
+
+![images](./images/WX20201128-191101@2x.png)
 
 * send message
 
