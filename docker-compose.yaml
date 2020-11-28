@@ -1,5 +1,15 @@
 version: "3"
 services:
+  haproxy: 
+    image: haproxytech/haproxy-debian
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.9
+    volumes:
+    - "./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg"
+    ports:
+    - "1883:1883"
+    - "10080:10080"
   webhook:
     image: jeffail/benthos
     volumes:
@@ -12,7 +22,6 @@ services:
   mq1:
     image: vernemq/vernemq
     ports:
-    - "1883:1883"
     - "8080:8080"
     - "8888:8888"
     environment:
