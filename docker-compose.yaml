@@ -1,0 +1,48 @@
+version: "3"
+services:
+  webhook:
+    image: jeffail/benthos
+    volumes:
+      - "./webhook.yaml:/benthos.yaml"
+    ports:
+      - "4195:4195"
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.11
+  mq1:
+    image: vernemq/vernemq
+    ports:
+    - "1883:1883"
+    - "8080:8080"
+    - "8888:8888"
+    environment:
+      - "DOCKER_VERNEMQ_ACCEPT_EULA=yes"
+      - "DOCKER_VERNEMQ_ALLOW_ANONYMOUS=on"
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.10
+  mq2:
+    image: vernemq/vernemq
+    environment:
+      - "DOCKER_VERNEMQ_ACCEPT_EULA=yes"
+      - "DOCKER_VERNEMQ_ALLOW_ANONYMOUS=on"
+      - "DOCKER_VERNEMQ_DISCOVERY_NODE=172.16.238.10"
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.12
+  mq3:
+    image: vernemq/vernemq
+    environment:
+      - "DOCKER_VERNEMQ_ACCEPT_EULA=yes"
+      - "DOCKER_VERNEMQ_ALLOW_ANONYMOUS=on"
+      - "DOCKER_VERNEMQ_DISCOVERY_NODE=172.16.238.10"
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.13
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
