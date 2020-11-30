@@ -11,6 +11,6 @@ client.on('connect', function () {
  
 client.on('message', function (topic, message) {
   // message is Buffer
-  console.log("app1",topic)
+  console.log("app2",topic)
   console.log(message.toString())
 })
