@@ -38,7 +38,7 @@ vmq-admin  webhooks show
 
 * webhook message
 
->  note payload with base64 encode
+>  note payload with base64 encode &&  docker-compose logs -f webhook
 
 
 ![images](./images/WX20201128-190750@2x.png)
